@@ -30,7 +30,7 @@ const scrapRecursive = async (page: Page, url: string):Promise<void> => {
             }).map((element: any) => element.href);
         }));
         links = links.filter((e: string)=> e != url && `${e}/` != url && !e.includes("#") && isValidUrl(e));
-        //we must exclude dublicates from list, check if url is valid and then continue scrapping
+        //we must exclude dublicates from list, check if url is valid and then continue scraping
         links = [...new Set(links)];
         if (links.length > 1) {
             await asyncForEach(links, async(item: string) => {
@@ -52,8 +52,7 @@ const scrapRecursive = async (page: Page, url: string):Promise<void> => {
 
 }
 
-
-export const startScrapping = async (url: string):Promise<IUrlWithStatusCode[]> => {
+export const startScraping = async (url: string):Promise<IUrlWithStatusCode[]> => {
     const browser: Browser = await puppeteer.launch();
     const page: Page = await browser.newPage();
     findedUrlsWithStatusCodes = [];

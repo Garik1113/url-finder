@@ -1,5 +1,5 @@
 import express, { Request, Response, Express } from 'express';
-import { startScrapping } from './scrapper';
+import { startScraping } from './scraper';
 import { isValidUrl } from './helper/url'
 import { IUrlWithStatusCode } from './interfaces';
 const app: Express = express();
@@ -15,7 +15,7 @@ app.get("/scrap", async(req: Request, res: Response): Promise<void> => {
             statusCode: "ERROR" 
         })
     } else {
-        const findedUrlsWithStatusCodes: IUrlWithStatusCode[] = await startScrapping(String(link));
+        const findedUrlsWithStatusCodes: IUrlWithStatusCode[] = await startScraping(String(link));
         res.status(200).json({
             findedUrlsWithStatusCodes,
             total: findedUrlsWithStatusCodes.length,
